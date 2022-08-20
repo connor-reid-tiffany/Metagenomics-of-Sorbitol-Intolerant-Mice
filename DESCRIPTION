@@ -1,0 +1,26 @@
+Package: sorbitolMetagenome
+Title: Metagenomics of Sorbitol Intolerant Mice
+Version: 0.0.0.9000
+Authors@R: 
+    person("Connor", "Tiffany", , "crtiffany@ucdavis.edu", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0001-8188-7720"))
+Description: This package provides interactive functions in the form of a shiny application to explore a shotgun metagenomic dataset from a paired study of sorbitol intolerant c57BL/6J mice before and after treatment. Sorbitol intolerance was induced using a combination of the broad spectrum antibiotic streptomycin and a high fat diet, 'western-style' diet.
+License: GPL (>= 3)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
+Imports: 
+    bslib,
+    colourpicker,
+    cowplot,
+    DT,
+    ggplot2,
+    ggplotify,
+    ggrepel,
+    gplots,
+    officer,
+    RColorBrewer,
+    reshape2,
+    shiny,
+    shinyWidgets,
+    thematic
