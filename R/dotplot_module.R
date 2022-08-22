@@ -199,8 +199,8 @@ dotplot_server <- function(id){
 
       data <- data[data$KO_NAME %in% input$Gene,]
 
-      p2 <- ggplot2::ggplot(data, ggplot2::aes(x = NAME, y = log2FoldChange)) + ggplot2::geom_point(size = 5) +
-        ggplot2::geom_errorbar(ggplot2::aes(ymin = log2FoldChange - qnorm(0.025)*lfcSE, ymax = log2FoldChange + qnorm(0.025)*lfcSE), size = 1.25) +
+      p2 <- ggplot2::ggplot(data, ggplot2::aes(x = NAME, y = log2FoldChange)) + ggplot2::geom_point(size = 5, color = "black") +
+        ggplot2::geom_errorbar(ggplot2::aes(ymin = log2FoldChange - qnorm(0.025)*lfcSE, ymax = log2FoldChange + qnorm(0.025)*lfcSE), size = 1.25, color = "black") +
         ggplot2::ggtitle("95% Confidence Interval") +
         ggplot2::coord_flip() +
         ggplot2::theme_bw()+
