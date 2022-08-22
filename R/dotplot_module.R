@@ -168,8 +168,8 @@ dotplot_server <- function(id){
       df_2$Abundance <- df$max_abund[match(df_2$ENTRY, df$ENTRY)]
       df_2$Abundance <- df_2$Abundance + 0.5
 
-      df$Timepoint[df$Timepoint=="T1"] <- "Before_HF+Strep"
-      df$Timepoint[df$Timepoint=="T2"] <- "After_HF+Strep"
+      df$Timepoint[df$Timepoint=="T1"] <- "HF_before_Str"
+      df$Timepoint[df$Timepoint=="T2"] <- "HF_4_weeks_after_Str"
 
       p1 <- ggplot2::ggplot(df, ggplot2::aes(x=NAME, y=Abundance, color = Timepoint)) +
 

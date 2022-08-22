@@ -193,7 +193,7 @@ heatmap_server <- function(id){
         HTML("
         The data shown in the heatmap were first transformed using the median of ratios method in DESeq2, and were then transformed by the glog for centering.
         The hierarchical clustering algorithm used to generate gene and sample dendrograms uses euclidean distance with a complete agglomeration method.
-        Samples that end in 1 are before treatment samples, while samples that end in 2 are after treatment samples.<br>
+        Samples that end in 1 are mice on a HF diet before streptomycin treatment, while samples that end in 2 are mice on a HF diet 4 weeks after streptomycin treatment.<br>
        <br>
        Perform the following steps to create a plot.<br>
        <br>

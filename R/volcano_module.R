@@ -241,8 +241,8 @@ volcano_server <- function(id){
         title = "Help",
         HTML("
         The data in the plot are derived from a paired DESeq2 wald test.
-        One group is before receiving streptomycin and a high fat diet, the other group is 4 weeks after receiving streptomycin and a high fat diet. Samples with a negative log2FoldChange are lower in the
-        mice after strep + HF diet, samples with a positive log2FoldChange are higher after treatment.<br>
+        One group is HF diet before receiving streptomycin, the other group is HF diet 4 weeks after receiving streptomycin. Samples with a negative log2FoldChange are lower in the
+        mice 4 weeks after streptomycin treatment , samples with a positive log2FoldChange are higher after treatment.<br>
        <br>
        Perform the following steps to create a plot.<br>
        <br>
