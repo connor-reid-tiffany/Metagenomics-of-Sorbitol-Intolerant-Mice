@@ -12,7 +12,7 @@ heatmap_ui <- function(id){
     HTML("<br><br><h5>Choose Data to Plot</h5><br><br>"),
     selectInput(ns("fill_variable"), "Select Orthology Metadata Category", choices = c("KO_Class", "KO_Subclass_1", "KO_Subclass_2")),
     #choices are selected server side based off observed event of fill_variable
-    selectizeInput(ns("fill_levels"), "Select Genes to Color", choices = NULL,multiple = FALSE),
+    selectizeInput(ns("fill_levels"), "Select Genes to Plot", choices = NULL,multiple = FALSE),
     #could reduce this to a function, might be useful for other modules
     actionButton(ns("exclude_Others"), "Create Plot with Selected Genes",icon = icon("chart-bar"),
                  style="color: #fff; background-color: #0694bf; border-color: #013747"),
@@ -57,11 +57,12 @@ heatmap_server <- function(id){
 
 
       data_stats <- readRDS("inst/extdata//tidy_normalized_countdata_HF_Strep.rds")
+
       data_stats$Abundance <- log(1 + data_stats$Abundance)
 
 
-      data_stats[,sapply(data_stats,is.factor)] <- as.data.frame(lapply(data_stats[,sapply(data_stats, is.factor)],
-                                                                        as.character))
+      data_stats$Sample <- as.character(data_stats$Sample)
+
       data_stats[,sapply(data_stats,is.character)] <- as.data.frame(lapply(data_stats[,sapply(data_stats, is.character)],
                                                                            function(x) gsub(pattern = " ", replacement = "_", x = x )))
       data_stats$KO_Subclass_2 <- gsub(pattern = "^.+?(?=_).", replacement = "", x = data_stats$KO_Subclass_2, perl = TRUE)
@@ -99,6 +100,13 @@ heatmap_server <- function(id){
 
       dat$df[,input$fill_variable] <- sapply(dat$df[, input$fill_variable], function(x) replace(x, !x %in% input$fill_levels, NA))
       dat$df <- dat$df[!is.na(dat$df[,input$fill_variable]),]
+      dat$df <- dat$df[!is.na(dat$df[,"Abundance"]),]
+
+      dat$df[,"ENTRY_Sample"] <- paste0(dat$df[,"ENTRY"],"_", dat$df[,"Sample"])
+      dat$df <- dat$df[!duplicated(dat$df[,c("ENTRY_Sample")]),]
+
+
+
 
 
 

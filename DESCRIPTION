@@ -8,7 +8,7 @@ Description: This package provides interactive functions in the form of a shiny 
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.1
 Imports: 
     bslib,
     colourpicker,
@@ -23,4 +23,5 @@ Imports:
     reshape2,
     shiny,
     shinyWidgets,
-    thematic
+    thematic,
+    spsComps

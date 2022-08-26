@@ -45,9 +45,9 @@ dotplot_ui <- function(id){
 #' @importFrom ggplot2 ggplot aes geom_point theme_bw theme element_text element_blank element_rect position_jitter stat_summary scale_color_manual ylab coord_flip ggtitle guides geom_errorbar element_line guide_legend
 #' @importFrom ggrepel geom_label_repel
 #' @importFrom cowplot plot_grid save_plot
-#' @impotFrom colourpicker colorInput
+#' @importFrom colourpicker colorInput
 #' @importFrom DT datatable
-#' @importFrom officer read_pptx add_slide phf_with ph_location_type
+#' @importFrom officer read_pptx add_slide ph_with ph_location_type
 dotplot_server <- function(id){
 
   moduleServer(id, function(input, output, session){
@@ -129,6 +129,10 @@ dotplot_server <- function(id){
       sub_genes <- gsub(pattern = "_.*", replacement = "", sub_genes)
 
       data <- data[data$ENTRY %in% sub_genes,]
+
+      data[,"ENTRY_Sample"] <- paste0(data[,"ENTRY"],"_", data[,"Sample"])
+      data<- data[!duplicated(data[,c("ENTRY_Sample")]),]
+
 
       data$padj <- sig_data$padj[match(data$ENTRY, sig_data$ENTRY)]
 

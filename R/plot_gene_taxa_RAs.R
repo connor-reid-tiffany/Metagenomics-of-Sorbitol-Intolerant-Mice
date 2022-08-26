@@ -8,13 +8,29 @@
 #' @param border An integer. Determines plot border thickness
 #' @return A ggplot2 object
 #' @importFrom stats aggregate as.formula
-#' @importFrom ggplot2 ggplot geom_bar aes facet_grid scale_fill_manual ylab theme_bw theme element_text element_rect element_blank
+#' @importFrom ggplot2 ggplot geom_bar aes facet_grid scale_fill_manual ylab theme_bw theme element_text element_rect element_blank as_labeller
+#' @importFrom spsComps shinyCatch
 
 
 plot_gene_taxa_RAs <- function(metagenome_data, genes, taxa_level, font_size, cols, border){
   #create formula for aggregate
   formula <- stats::as.formula(paste0("Abundance", "~","Sample", "+", "Timepoint", "+", "NAME", "+", taxa_level))
+
+  metagenome_data <- metagenome_data[!is.na(metagenome_data$Sample),]
   #sum counts by taxa
+  if(length(metagenome_data[!is.na(metagenome_data[1]),])==0){
+
+    shinyCatch(stop("No taxonomic information for this gene"), blocking_level = "error")
+
+  }
+
+  if(eval(nrow(metagenome_data[metagenome_data[,taxa_level]=="None",]) == nrow(metagenome_data))==TRUE){
+
+    shinyCatch(stop("No taxonomic information for this gene at selected level"), blocking_level = "error")
+
+  }
+
+
   metagenome_agg <-  stats::aggregate(formula, metagenome_data, sum)
   #create barplots
   ggplot2::ggplot() +

@@ -12,7 +12,7 @@ volcano_ui <- function(id){
     HTML("<br><br><h5>Choose Data to Plot</h5><br><br>"),
     selectInput(ns("fill_variable"), "Select Orthology Metadata Category", choices = c("KO_Class", "KO_Subclass_1", "KO_Subclass_2")),
     #choices are selected server side based off observed event of fill_variable
-    selectizeInput(ns("fill_levels"), "Select Genes to Color", choices = NULL,multiple = TRUE),
+    selectizeInput(ns("fill_levels"), "Select Genes to Plot", choices = NULL,multiple = TRUE),
     #could reduce this to a function, might be useful for other modules
     actionButton(ns("exclude_Others"), "Create Plot with Selected Genes",icon = icon("chart-bar"),
                  style="color: #fff; background-color: #0694bf; border-color: #013747"),
@@ -53,9 +53,10 @@ volcano_server <- function(id){
     data <- reactive({
 
       data_stats <- readRDS("inst/extdata/HF_Strep_After_vs_Before.rds")
+      data_stats[,sapply(data_stats,is.character)] <- as.data.frame(lapply(data_stats[,sapply(data_stats, is.character)],
+                                                                           function(x) gsub(pattern = " ", replacement = "_", x = x )))
       data_stats$KO_Subclass_2 <- gsub(pattern = "^.+?(?=_).", replacement = "", x = data_stats$KO_Subclass_2, perl = TRUE)
       data_stats$KO_Subclass_2 <- gsub(pattern = "\\[PATH.*", replacement = "", x = data_stats$KO_Subclass_2)
-
       return(data_stats)
 
     })
@@ -103,6 +104,7 @@ volcano_server <- function(id){
 
       dat$df <- data()
       dat$df[,input$fill_variable] <- sapply(dat$df[, input$fill_variable], function(x) replace(x, !x %in% input$fill_levels, "Other"))
+      dat$df <- dat$df[!duplicated(dat$df[,c("ENTRY")]),]
       choices <- unique(fill_choice())
       updateSelectInput(inputId = "fill_levels", choices = c(choices, "Other"), selected = c(input$fill_levels, "Other"))
 
@@ -113,6 +115,7 @@ volcano_server <- function(id){
       dat$df <- data()
       dat$df[,input$fill_variable] <- sapply(dat$df[, input$fill_variable], function(x) replace(x, !x %in% input$fill_levels, NA))
       dat$df <- dat$df[!is.na(dat$df[,input$fill_variable]),]
+      dat$df <- dat$df[!duplicated(dat$df[,c("ENTRY")]),]
 
     })
 

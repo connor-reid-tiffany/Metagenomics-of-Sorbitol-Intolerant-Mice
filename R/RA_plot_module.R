@@ -73,7 +73,9 @@ RA_server <- function(id){
 
       gene_data<- gene_data[gene_data$padj <= sig_level,]
 
-      updateSelectizeInput(inputId = "Gene", choices = unique(gene_data[,"KO_NAME"]))
+      gene_data <- gene_data[!is.na(gene_data$NAME),]
+
+      updateSelectizeInput(inputId = "Gene", choices = unique(gene_data[,"KO_NAME"]),selected = character(0))
 
       gene_choice$df <- gene_data
 
@@ -101,7 +103,7 @@ RA_server <- function(id){
       KO_group <- input$KO_group
       gene_data <- subset(gene_data, gene_data[,KO_level]== KO_group)
 
-      updateSelectizeInput(inputId = "Gene", choices = unique(gene_data[,"KO_NAME"]))
+      updateSelectizeInput(inputId = "Gene", choices = unique(gene_data[,"KO_NAME"]),selected = character(0))
 
       gene_choice$df <- gene_data
 
@@ -129,6 +131,12 @@ RA_server <- function(id){
 
       data <- subset(data, NAME %in% sub_genes)
 
+      taxa <- input$taxa_level
+
+      data[,taxa] <- gsub(pattern = "-", replacement = "_", x = data[,taxa])
+
+      data[,taxa] <- gsub(pattern = " ", replacement = "_", x = data[,taxa])
+
 
 
 
@@ -139,6 +147,7 @@ RA_server <- function(id){
     #dynamic UI that only appears once fill_level inputs are selected
     output$myPanel <- renderUI({
       req(length(input$taxa_level)==1)
+      req(data())
 
       taxa <- input$taxa_level
       df <- data()
