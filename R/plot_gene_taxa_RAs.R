@@ -36,7 +36,7 @@ plot_gene_taxa_RAs <- function(metagenome_data, genes, taxa_level, font_size, co
   ggplot2::ggplot() +
     ggplot2::geom_bar(data = metagenome_agg, mapping = ggplot2::aes(x = Sample, y = Abundance, fill = metagenome_agg[,taxa_level]),
              stat = "identity", position = "stack", color = "black", size = 1) +
-    ggplot2::facet_grid(.~Timepoint, scales = "free", space = "free_x", labeller = as_labeller(c("Before_HF+Strep"="HF_before_Str", "After_HF+Strep" = "HF_4_weeks_after_Str"))) +
+    ggplot2::facet_grid(.~Timepoint, scales = "free", space = "free_x", labeller = ggplot2::as_labeller(c("Before_HF+Strep"="HF_before_Str", "After_HF+Strep" = "HF_4_weeks_after_Str"))) +
     ggplot2::scale_fill_manual(values = cols) +
     ggplot2::ylab(paste0(gsub(pattern = "_", replacement = " ", x = genes), "", "Abundance")) +
     ggplot2::theme_bw() +
