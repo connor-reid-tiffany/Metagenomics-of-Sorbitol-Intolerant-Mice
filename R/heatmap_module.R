@@ -151,12 +151,16 @@ heatmap_server <- function(id){
           dendrogram <- c("col")
         }
 
-        heatmap_plot <- ggplotify::as.ggplot(ggplotify::as.grob(function() gplots::heatmap.2(x = t(plot_data),col = coul,scale = "none", dendrogram = dendrogram, trace = "none", density.info = "none",
-                                  breaks = breaks, margins =
-                                    margins, cexRow = input$font_size, cexCol = input$font_size_col)))
+        font_size <- input$font_size
+        font_size_col <- input$font_size_col
 
 
-        return(heatmap_plot)
+
+        promises::future_promise({ggplotify::as.ggplot(ggplotify::as.grob(function() gplots::heatmap.2(x = t(plot_data),col = coul,scale = "none", dendrogram = dendrogram, trace = "none", density.info = "none",
+                                                                                             breaks = breaks, margins =
+                                                                                               margins, cexRow = font_size, cexCol = font_size_col)))
+})
+
 
       }
     )

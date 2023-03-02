@@ -166,7 +166,7 @@ RA_server <- function(id){
 
     RA_plot <- reactive({
 
-      req(data)
+      req(data())
       req(length(input$taxa_level)==1)
 
       taxa <- input$taxa_level
@@ -175,11 +175,17 @@ RA_server <- function(id){
       # print(cols)
       cols <- eval(parse(text = cols))
 
-      plot <- plot_gene_taxa_RAs(metagenome_data = data(), genes = input$Gene, taxa_level = input$taxa_level,
-                                 font_size = input$font_size, cols = cols, border = input$border_size)
+      metagenome_data <- data()
+      genes <- input$Gene
+      taxa_level <- input$taxa_level
+      font_size <- input$font_size
+      border <- input$border_size
 
-      return(plot)
+      promises::future_promise({
 
+        plot_gene_taxa_RAs(metagenome_data = metagenome_data, genes = genes, taxa_level = taxa_level,
+                                 font_size = font_size, cols = cols, border = border)
+        })
     })
 
 

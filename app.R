@@ -23,7 +23,9 @@
 #library(cowplot)
 #library(ggrepel)
 #library(ggplotify)
-
+#library(promises)
+#library(future)
+future::plan(future::multisession)
 
 
 #my_theme <- bslib::bs_theme(bootswatch = "flatly")
