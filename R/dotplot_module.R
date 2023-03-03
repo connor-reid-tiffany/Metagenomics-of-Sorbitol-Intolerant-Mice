@@ -61,7 +61,7 @@ dotplot_server <- function(id){
       gene_choice$df <- readRDS("inst/extdata/HF_Strep_After_vs_Before.rds")
 
 
-      updateSelectizeInput(inputId = "Gene", choices = unique(gene_choice$df[,"KO_NAME"]))
+      updateSelectizeInput(session,inputId = "Gene", choices = unique(gene_choice$df[,"KO_NAME"]), server = TRUE)
 
 
 
