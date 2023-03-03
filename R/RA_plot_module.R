@@ -43,8 +43,10 @@ RA_ui <- function(id){
 #' @importFrom shiny moduleServer observeEvent reactiveValues updateSelectizeInput req updateSelectInput reactive renderUI downloadHandler showModal modalDialog renderPlot
 #' @importFrom thematic thematic_shiny
 #' @importFrom colourpicker colourInput
-#' @importFrom ggplot2 ggsave
+#' @importFrom ggplot2 ggsave ggplot geom_bar aes facet_grid scale_fill_manual ylab theme_bw theme element_text element_rect element_blank as_labeller
 #' @importFrom officer read_pptx add_slide ph_with ph_location_type
+#' @importFrom stats aggregate as.formula
+#' @importFrom spsComps shinyCatch
 #' @importFrom promises future_promise
 
 RA_server <- function(id){
@@ -206,9 +208,9 @@ RA_server <- function(id){
       content = function (file) {
         if (grepl(".pptx", file)==TRUE){
 
-          doc <-  read_pptx()
-          doc <- add_slide(doc, layout =  'Title and Content', master = 'Office Theme')
-          doc <- ph_with(doc, value = RA_plot(), location = ph_location_type(type = "body"))
+          doc <- officer::read_pptx()
+          doc <- officer::add_slide(doc, layout =  'Title and Content', master = 'Office Theme')
+          doc <- officer::ph_with(doc, value = RA_plot(), location = officer::ph_location_type(type = "body"))
           print(doc, file)
 
         }else {
