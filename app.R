@@ -25,13 +25,16 @@
 #library(ggplotify)
 #library(promises)
 #library(future)
-future::plan(future::multisession)
+
 
 
 #my_theme <- bslib::bs_theme(bootswatch = "flatly")
 #' The shiny app
 #' @importFrom shiny fluidPage titlePanel tags radioButtons sidebarLayout sidebarPanel tabsetPanel tabPanel mainPanel observe session shinyApp
 #' @importFrom bslib bs_theme bs_theme_update
+#' @importFrom future plan multisession
+
+future::plan(future::multisession)
 myApp <- function(...){
   my_theme <- bslib::bs_theme(bootswatch = "flatly")
   ui <- fluidPage(

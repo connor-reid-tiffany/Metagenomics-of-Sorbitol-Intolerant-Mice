@@ -24,4 +24,6 @@ Imports:
     shiny,
     shinyWidgets,
     thematic,
-    spsComps
+    spsComps,
+    future,
+    promises

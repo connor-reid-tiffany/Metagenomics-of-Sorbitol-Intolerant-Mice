@@ -46,6 +46,7 @@ heatmap_ui <- function(id){
 #' @importFrom reshape2 dcast
 #' @importFrom officer read_pptx add_slide ph_with ph_location_type
 #' @importFrom thematic thematic_shiny
+#' @importFrom promises future_promise
 
 heatmap_server <- function(id){
 

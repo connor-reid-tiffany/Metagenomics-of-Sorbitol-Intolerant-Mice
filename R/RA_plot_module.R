@@ -45,6 +45,7 @@ RA_ui <- function(id){
 #' @importFrom colourpicker colourInput
 #' @importFrom ggplot2 ggsave
 #' @importFrom officer read_pptx add_slide ph_with ph_location_type
+#' @importFrom promises future_promise
 
 RA_server <- function(id){
 
