@@ -5,9 +5,9 @@ account: clostridia-enjoyer
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 6784975
-bundleId: 6913153
+bundleId: 6913784
 url: https://clostridia-enjoyer.shinyapps.io/sorbitolMetagenome/
-when: 1677873486.91584
-lastSyncTime: 1677873486.91585
+when: 1677885325.74634
+lastSyncTime: 1677885325.74634
 asMultiple: FALSE
 asStatic: FALSE

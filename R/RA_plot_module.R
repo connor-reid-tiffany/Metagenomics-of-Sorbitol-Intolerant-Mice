@@ -48,6 +48,7 @@ RA_ui <- function(id){
 #' @importFrom stats aggregate as.formula
 #' @importFrom spsComps shinyCatch
 #' @importFrom promises future_promise
+#' @importFrom fst fst write_fst
 
 RA_server <- function(id){
 
@@ -130,9 +131,15 @@ RA_server <- function(id){
 
       sub_genes <- gsub(pattern = '^[^_]*_', replacement = "", sub_genes)
 
-      data <- readRDS("inst/extdata/tidy_countdata_with_taxa_HF_Strep.rds")
+      #path <- paste0(tempfile(), ".fst")
 
-      data <- subset(data, NAME %in% sub_genes)
+      #fst::write_fst(readRDS("inst/extdata/tidy_countdata_with_taxa_HF_Strep.rds"), path)
+
+      #data <- fst::fst(path)
+
+      data <- fst::fst("inst/extdata/tidy_countdata_with_taxa_HF_Strep.fst")
+
+      data <- data[data$NAME %in% sub_genes,]
 
       taxa <- input$taxa_level
 

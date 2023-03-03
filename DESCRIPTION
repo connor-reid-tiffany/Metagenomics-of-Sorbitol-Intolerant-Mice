@@ -26,4 +26,6 @@ Imports:
     thematic,
     spsComps,
     future,
-    promises
+    promises,
+    fst,
+    fstcore
