@@ -75,7 +75,7 @@ dotplot_server <- function(id){
 
       gene_data<- gene_data[gene_data$padj <= sig_level,]
 
-      updateSelectizeInput(inputId = "Gene", choices = unique(gene_data[,"KO_NAME"]))
+      updateSelectizeInput(session,inputId = "Gene", choices = unique(gene_data[,"KO_NAME"]), server = TRUE)
 
       gene_choice$df <- gene_data
 
@@ -103,7 +103,7 @@ dotplot_server <- function(id){
       KO_group <- input$KO_group
       gene_data <- subset(gene_data, gene_data[,KO_level]== KO_group)
 
-      updateSelectizeInput(inputId = "Gene", choices = unique(gene_data[,"KO_NAME"]))
+      updateSelectizeInput(session,inputId = "Gene", choices = unique(gene_data[,"KO_NAME"]), server = TRUE)
 
       gene_choice$df <- gene_data
 
