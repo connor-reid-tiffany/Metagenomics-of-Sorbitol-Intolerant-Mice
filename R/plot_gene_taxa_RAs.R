@@ -20,13 +20,13 @@ plot_gene_taxa_RAs <- function(metagenome_data, genes, taxa_level, font_size, co
   #sum counts by taxa
   if(length(metagenome_data[!is.na(metagenome_data[1]),])==0){
 
-    shinyCatch(stop("No taxonomic information for this gene"), blocking_level = "error")
+    spsComps::shinyCatch(stop("No taxonomic information for this gene"), blocking_level = "error")
 
   }
 
   if(eval(nrow(metagenome_data[metagenome_data[,taxa_level]=="None",]) == nrow(metagenome_data))==TRUE){
 
-    shinyCatch(stop("No taxonomic information for this gene at selected level"), blocking_level = "error")
+    spsComps::shinyCatch(stop("No taxonomic information for this gene at selected level"), blocking_level = "error")
 
   }
 
