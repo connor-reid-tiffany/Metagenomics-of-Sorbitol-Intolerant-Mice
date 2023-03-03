@@ -157,10 +157,10 @@ heatmap_server <- function(id){
 
 
 
-        promises::future_promise({ggplotify::as.ggplot(ggplotify::as.grob(function() gplots::heatmap.2(x = t(plot_data),col = coul,scale = "none", dendrogram = dendrogram, trace = "none", density.info = "none",
+        heatmap_plot <- ggplotify::as.ggplot(ggplotify::as.grob(function() gplots::heatmap.2(x = t(plot_data),col = coul,scale = "none", dendrogram = dendrogram, trace = "none", density.info = "none",
                                                                                              breaks = breaks, margins =
                                                                                                margins, cexRow = font_size, cexCol = font_size_col)))
-})
+        return(heatmap_plot)
 
 
       }

@@ -185,11 +185,11 @@ RA_server <- function(id){
       font_size <- input$font_size
       border <- input$border_size
 
-      promises::future_promise({
-
-        plot_gene_taxa_RAs(metagenome_data = metagenome_data, genes = genes, taxa_level = taxa_level,
+      RA_plot <-  plot_gene_taxa_RAs(metagenome_data = metagenome_data, genes = genes, taxa_level = taxa_level,
                                  font_size = font_size, cols = cols, border = border)
-        })
+
+      return(RA_plot)
+
     })
 
 

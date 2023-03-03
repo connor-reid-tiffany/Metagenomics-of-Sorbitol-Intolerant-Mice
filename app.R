@@ -34,7 +34,7 @@
 #' @importFrom bslib bs_theme bs_theme_update
 #' @importFrom future plan multisession
 
-future::plan(future::multisession)
+#future::plan(future::multisession)
 myApp <- function(...){
   my_theme <- bslib::bs_theme(bootswatch = "flatly")
   ui <- fluidPage(
