@@ -19,8 +19,8 @@ RA_ui <- function(id){
     selectInput(ns("KO_level"), label = "Select Orthology Metadata Category", choices = c("KO_Class", "KO_Subclass_1", "KO_Subclass_2")),
     selectInput(ns("KO_group"), label = "Select Gene Group", choices = NULL, multiple = FALSE),
     actionButton(ns("subset_ortho"), "Subset",style="color: #fff; background-color: #0694bf; border-color: #013747"),
+    selectizeInput(ns("taxa_level"), "Select Taxa Level to Group by", choices = c("Phylum", "Class", "Order", "Family", "Genus", "Genus_Species"), multiple = FALSE),
     selectizeInput(ns("Gene"), "Select Gene to Plot", choices = NULL,multiple = FALSE),
-    selectInput(ns("taxa_level"), "Select Taxa Level to Group by", choices = c("Phylum", "Class", "Order", "Family", "Genus", "Genus_Species"), multiple = FALSE),
     HTML("<br><br><h5>Adjust Plot Parameters</h5><br><br>"),
     sliderInput(ns("height"), "Plot Height", min = 100, max = 1500, value = 600),
     sliderInput(ns("width"), "Plot Width", min = 100, max = 1500, value = 700),
@@ -167,7 +167,8 @@ RA_server <- function(id){
     RA_plot <- reactive({
 
       req(data())
-      req(length(input$taxa_level)==1)
+      req(input$taxa_level)
+
 
       taxa <- input$taxa_level
 
