@@ -62,7 +62,7 @@ RA_server <- function(id){
       gene_choice$df <- readRDS("inst/extdata/HF_Strep_After_vs_Before.rds")
 
 
-      updateSelectizeInput(inputId = "Gene", choices = unique(gene_choice$df[,"KO_NAME"]), selected = character(0))
+      updateSelectizeInput(session,inputId = "Gene", choices = unique(gene_choice$df[,"KO_NAME"]), selected = character(0), server = TRUE)
 
 
 
@@ -78,7 +78,7 @@ RA_server <- function(id){
 
       gene_data <- gene_data[!is.na(gene_data$NAME),]
 
-      updateSelectizeInput(inputId = "Gene", choices = unique(gene_data[,"KO_NAME"]),selected = character(0))
+      updateSelectizeInput(session, inputId = "Gene", choices = unique(gene_data[,"KO_NAME"]),selected = character(0), server = TRUE)
 
       gene_choice$df <- gene_data
 
@@ -106,7 +106,7 @@ RA_server <- function(id){
       KO_group <- input$KO_group
       gene_data <- subset(gene_data, gene_data[,KO_level]== KO_group)
 
-      updateSelectizeInput(inputId = "Gene", choices = unique(gene_data[,"KO_NAME"]),selected = character(0))
+      updateSelectizeInput(session,inputId = "Gene", choices = unique(gene_data[,"KO_NAME"]),selected = character(0), server = TRUE)
 
       gene_choice$df <- gene_data
 
